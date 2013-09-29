@@ -1,0 +1,16 @@
+doctype 5
+html
+  head
+    title Chat
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='script.js')
+  body(ng-app ng-controller='ChatCtrl')
+    div(ng-show='!user.connected')
+      input(ng-model='user.name', placeholder='enter your name')
+      button(ng-click='user.connect()') Connect
+    div.entries
+      p(ng-repeat='entry in entries') {{entry.user}} : {{entry.message}}
+    div(ng-show='user.connected')
+      input(ng-model='message.text', placeholder='enter a message')
+      button(ng-click='message.send()') Send
