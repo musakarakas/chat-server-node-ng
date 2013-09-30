@@ -10,7 +10,7 @@ html
       input(ng-model='user.name', placeholder='enter your name')
       button(ng-click='user.connect()') Connect
     div.entries
-      p(ng-repeat='entry in entries') {{entry.user}} : {{entry.message}}
+      p(ng-repeat='message in messages') {{message.user}} : {{message.text}}
     div(ng-show='user.connected')
       input(ng-model='message.text', placeholder='enter a message')
       button(ng-click='message.send()') Send

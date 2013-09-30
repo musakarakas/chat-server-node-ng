@@ -1,7 +1,7 @@
-function ChatCtrl ($scope) {
+function ChatCtrl($scope) {
   var socket;
 
-  $scope.entries = [];
+  $scope.messages = [];
 
   $scope.user = {
     name: '',
@@ -9,8 +9,10 @@ function ChatCtrl ($scope) {
     connect: function () {
       if (!this.name) return;
       socket = io.connect();
-      socket.on('message', handle_message);
-      socket.emit('setUser', this.name);
+      socket.on('message', function (message) {
+        $scope.$apply(function () { $scope.messages.push(message); });
+      });
+      socket.emit('sign-in', this.name);
       this.connected = true;
     }
   };
@@ -20,18 +22,8 @@ function ChatCtrl ($scope) {
     send: function () {
       if (!this.text) return;
       socket.emit('message', this.text);
-      addMessage('Me', this.text);
+      $scope.messages.push({user: 'Me', text: this.text});
       this.text = '';
     }
   };
-
-  function addMessage(user, text) {
-    $scope.entries.push({user: user, message: text});
-  }
-
-  function handle_message(message) {
-    $scope.$apply(function () {
-      addMessage(message['user'], message['text']);
-    });
-  }
 }
