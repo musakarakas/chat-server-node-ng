@@ -1,12 +1,8 @@
 {
-  "name": "ChatServer",
-  "version": "0.0.0",
+  "private": true,
   "dependencies": {
-    "socket.io": "latest",
-    "express": "latest",
-    "jade": "latest"
-  },
-  "subdomain": "angular-node-chat",
-  "scripts": { "start": "node server" },
-  "engines": { "node": "0.10.x" }
+    "socket.io": "0.x.x",
+    "express": "3.x.x",
+    "jade": "0.x.x"
+  }
 }
